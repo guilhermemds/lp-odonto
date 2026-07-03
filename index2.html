@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Nome da Clínica] — Odontologia para toda a família</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #2A241E;
+    --ink-soft: #59504A;
+    --bg: #F2ECDE;
+    --bg-alt: #EAE2D0;
+    --card: #FFFCF6;
+    --sage: #3F5D4E;
+    --sage-deep: #2C4438;
+    --sage-tint: #D8E1D1;
+    --honey: #D9A441;
+    --honey-deep: #B9812A;
+    --peach: #F3D9BE;
+    --rose: #DD8F82;
+    --pine: #1E2E24;
+    --pine-ink: #E9E4D6;
+    --line: rgba(42,36,30,0.14);
+    --radius-lg: 34px;
+    --radius-md: 20px;
+    --serif: 'Newsreader', serif;
+    --sans: 'Manrope', sans-serif;
+    --script: 'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img, svg{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  h1,h2,h3{font-family:var(--serif); font-weight:500; letter-spacing:-0.01em; color:var(--ink);}
+  .eyebrow{
+    font-family:var(--sans); font-weight:700; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--sage-deep); display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{content:""; width:22px; height:2px; background:var(--honey); display:inline-block; border-radius:2px;}
+
+  /* buttons */
+  .btn{
+    display:inline-flex; align-items:center; gap:10px; font-family:var(--sans); font-weight:700; font-size:15.5px;
+    padding:16px 30px; border-radius:100px; cursor:pointer; border:none; transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{ background:var(--honey); color:#241A08; box-shadow:0 10px 24px -8px rgba(185,129,42,0.55);}
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 14px 28px -8px rgba(185,129,42,0.65); background:var(--honey-deep); color:#fff;}
+  .btn-ghost{ background:transparent; color:var(--ink); border:1.5px solid var(--line); }
+  .btn-ghost:hover{ border-color:var(--sage); background:var(--sage-tint); }
+  .btn-onDark{ background:var(--honey); color:#241A08; }
+  .btn-onDark:hover{ background:#fff; color:var(--pine); }
+  .btn small{font-weight:600; opacity:.7; font-size:12px;}
+
+  /* signature smile-curve divider */
+  .smile-divider{ width:100%; height:46px; display:block; margin: 4px 0; }
+  .smile-divider path{ fill:none; stroke:var(--sage); stroke-width:2.5; stroke-linecap:round; opacity:.55; }
+
+  /* ================= NAV ================= */
+  header.nav{
+    position:sticky; top:0; z-index:50; backdrop-filter:blur(10px);
+    background:rgba(242,236,222,0.82); border-bottom:1px solid var(--line);
+  }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
+  .logo{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:22px; display:flex; align-items:center; gap:10px;}
+  .logo-mark{ width:34px; height:34px; border-radius:50%; background:var(--sage); position:relative; flex:none;}
+  .logo-mark::after{ content:""; position:absolute; inset:9px; border:2px solid var(--peach); border-bottom-color:transparent; border-radius:50%; transform:rotate(45deg);}
+  .nav-links{ display:flex; gap:34px; font-size:14.5px; font-weight:600; color:var(--ink-soft);}
+  .nav-links a:hover{ color:var(--sage-deep); }
+  .nav-cta{ display:flex; align-items:center; gap:18px; }
+  .nav-phone{ font-size:14px; font-weight:700; color:var(--sage-deep); }
+  @media (max-width:900px){ .nav-links{display:none;} .nav-phone{display:none;} }
+
+  /* ================= HERO ================= */
+  .hero{ padding:76px 0 40px; position:relative; }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center; }
+  @media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; gap:44px;} }
+
+  .hero h1{ font-size:clamp(38px, 5.4vw, 62px); line-height:1.06; margin-bottom:22px; }
+  .hero h1 em{ font-style:italic; color:var(--sage-deep); }
+  .hero p.lead{ font-size:18.5px; color:var(--ink-soft); max-width:480px; margin-bottom:32px; }
+  .hero-ctas{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-bottom:26px; }
+  .trust-mini{ display:flex; gap:22px; flex-wrap:wrap; font-size:13.5px; color:var(--ink-soft); font-weight:600;}
+  .trust-mini span{ display:flex; align-items:center; gap:7px;}
+  .dot{ width:6px; height:6px; border-radius:50%; background:var(--honey); flex:none;}
+
+  .hero-art{ position:relative; }
+  .blob{
+    position:relative; border-radius:63% 37% 41% 59% / 52% 44% 56% 48%;
+    background:linear-gradient(155deg, var(--sage) 0%, var(--sage-deep) 100%);
+    aspect-ratio: 1/1.05; overflow:hidden; box-shadow:0 40px 70px -30px rgba(30,46,36,0.45);
+  }
+  .blob-photo{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    color:var(--sage-tint); font-family:var(--sans); font-size:13px; text-align:center; padding:30px;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,255,255,0.10), transparent 45%),
+      linear-gradient(155deg, var(--sage) 0%, var(--sage-deep) 100%);
+  }
+  .float-card{
+    position:absolute; background:var(--card); border-radius:18px; padding:16px 20px;
+    box-shadow:0 22px 40px -18px rgba(42,36,30,0.35); display:flex; align-items:center; gap:12px;
+    font-size:13.5px; font-weight:700; max-width:220px;
+  }
+  .float-card .ic{ width:34px; height:34px; border-radius:50%; background:var(--peach); display:flex; align-items:center; justify-content:center; flex:none; font-size:16px;}
+  .float-card.c1{ top:8%; left:-8%; }
+  .float-card.c2{ bottom:10%; right:-6%; text-align:left; }
+  @media (max-width:960px){ .float-card{ position:static; margin-top:14px; max-width:none; } .float-card.c1{margin-bottom:0;} }
+  @media (max-width:960px){ .hero-art{ display:flex; flex-direction:column; gap:14px; } }
+
+  .signature-note{ font-family:var(--script); font-size:22px; color:var(--sage-deep); margin-top:10px; }
+
+  /* ================= TRUST STRIP ================= */
+  .trust-strip{ background:var(--sage-tint); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:30px 0;}
+  .trust-strip-inner{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; }
+  .trust-item{ display:flex; align-items:flex-start; gap:12px; flex:1 1 220px; }
+  .trust-item .ic{ width:38px; height:38px; border-radius:12px; background:var(--card); display:flex; align-items:center; justify-content:center; flex:none; font-size:18px;}
+  .trust-item p{ font-size:14px; font-weight:700; color:var(--sage-deep); line-height:1.3;}
+  .trust-item span{ font-size:12.5px; color:var(--ink-soft); font-weight:500; }
+
+  /* ================= SECTION GENERIC ================= */
+  section{ padding:100px 0; }
+  @media (max-width:640px){ section{ padding:64px 0; } }
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .section-head h2{ font-size:clamp(30px,4vw,44px); line-height:1.12; }
+  .section-head p{ color:var(--ink-soft); font-size:16.5px; margin-top:16px; }
+  .center{ text-align:center; margin-left:auto; margin-right:auto; }
+
+  /* ================= BENEFITS ZIGZAG ================= */
+  .zig{ display:flex; flex-direction:column; gap:88px; }
+  .zig-row{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  .zig-row.rev .zig-visual{ order:2; }
+  @media (max-width:860px){ .zig-row, .zig-row.rev{ grid-template-columns:1fr; gap:26px; } .zig-row.rev .zig-visual{ order:0; } }
+  .zig-visual{
+    aspect-ratio:4/3; border-radius:var(--radius-lg); background:var(--peach);
+    display:flex; align-items:center; justify-content:center; font-size:52px; position:relative; overflow:hidden;
+  }
+  .zig-visual::after{ content:""; position:absolute; inset:0; background:radial-gradient(circle at 75% 20%, rgba(255,255,255,.5), transparent 55%); }
+  .zig-num{ font-family:var(--serif); font-style:italic; color:var(--honey-deep); font-size:15px; margin-bottom:10px; display:block;}
+  .zig-text h3{ font-size:26px; margin-bottom:14px; }
+  .zig-text p{ color:var(--ink-soft); font-size:15.5px; margin-bottom:18px; }
+  .zig-text ul li{ display:flex; gap:10px; font-size:14.5px; color:var(--ink); margin-bottom:9px; font-weight:600;}
+  .zig-text ul li::before{ content:"✓"; color:var(--sage-deep); font-weight:800; }
+
+  /* ================= HOW IT WORKS (timeline) ================= */
+  .timeline-wrap{ position:relative; }
+  .timeline{ display:grid; grid-template-columns:repeat(3,1fr); gap:40px; position:relative; }
+  @media (max-width:860px){ .timeline{ grid-template-columns:1fr; gap:34px; } }
+  .step{ background:var(--card); border-radius:var(--radius-md); padding:32px 26px; box-shadow:0 18px 40px -26px rgba(42,36,30,0.35); position:relative; }
+  .step .step-eyebrow{ font-family:var(--script); font-size:24px; color:var(--rose); margin-bottom:8px; }
+  .step h3{ font-size:19.5px; margin-bottom:10px; }
+  .step p{ font-size:14.5px; color:var(--ink-soft); }
+
+  /* ================= MANIFESTO / MECANISMO (dark) ================= */
+  .manifesto{ background:var(--pine); color:var(--pine-ink); border-radius:var(--radius-lg); margin:0 auto; position:relative; overflow:hidden;}
+  .manifesto-inner{ padding:78px 56px; max-width:820px; }
+  @media (max-width:640px){ .manifesto-inner{ padding:52px 26px; } }
+  .manifesto .eyebrow{ color:var(--honey); }
+  .manifesto .eyebrow::before{ background:var(--honey); }
+  .manifesto h2{ color:var(--pine-ink); font-size:clamp(28px,3.6vw,40px); line-height:1.18; margin-bottom:26px; }
+  .manifesto h2 em{ color:var(--honey); font-style:italic; }
+  .manifesto p{ color:#C6CDC3; font-size:16px; max-width:600px; margin-bottom:30px; }
+  .manifesto-tag{ display:flex; flex-wrap:wrap; gap:12px; }
+  .manifesto-tag span{ border:1px solid rgba(233,228,214,0.25); border-radius:100px; padding:8px 16px; font-size:13px; font-weight:600; color:var(--pine-ink); }
+
+  /* ================= BEFORE/AFTER ================= */
+  .compare{ display:grid; grid-template-columns:1fr 1fr; gap:0; border-radius:var(--radius-lg); overflow:hidden; box-shadow:0 24px 50px -30px rgba(42,36,30,0.4);}
+  @media (max-width:760px){ .compare{ grid-template-columns:1fr; } }
+  .compare-col{ padding:44px 38px; }
+  .compare-col.before{ background:var(--bg-alt); }
+  .compare-col.after{ background:var(--sage-tint); }
+  .compare-col h4{ font-family:var(--serif); font-style:italic; font-size:20px; margin-bottom:18px; }
+  .compare-col.before h4{ color:#8A7F6B; }
+  .compare-col.after h4{ color:var(--sage-deep); }
+  .compare-col ul li{ font-size:14.5px; margin-bottom:12px; padding-left:20px; position:relative; color:var(--ink-soft);}
+  .compare-col.before ul li::before{ content:"–"; position:absolute; left:0; color:#B0A48C; font-weight:800;}
+  .compare-col.after ul li::before{ content:"✓"; position:absolute; left:0; color:var(--sage-deep); font-weight:800;}
+  .compare-col.after li{ color:var(--ink); font-weight:600; }
+
+  /* ================= DEPOIMENTOS (scroll strip) ================= */
+  .testi-scroll{ display:flex; gap:24px; overflow-x:auto; padding-bottom:12px; scroll-snap-type:x mandatory; }
+  .testi-scroll::-webkit-scrollbar{ height:6px; }
+  .testi-scroll::-webkit-scrollbar-thumb{ background:var(--line); border-radius:10px; }
+  .testi-card{ scroll-snap-align:start; flex:0 0 320px; background:var(--card); border-radius:var(--radius-md); padding:30px; box-shadow:0 16px 34px -24px rgba(42,36,30,0.35); }
+  .testi-stars{ color:var(--honey-deep); font-size:15px; margin-bottom:14px; letter-spacing:2px;}
+  .testi-card p{ font-size:14.5px; color:var(--ink-soft); margin-bottom:20px; min-height:80px;}
+  .testi-person{ display:flex; align-items:center; gap:12px; }
+  .testi-avatar{ width:40px; height:40px; border-radius:50%; background:var(--peach); flex:none; }
+  .testi-person strong{ font-size:13.5px; display:block; }
+  .testi-person span{ font-size:12px; color:var(--ink-soft); }
+
+  /* ================= FAQ ================= */
+  .faq-list{ max-width:760px; margin:0 auto; }
+  .faq-item{ border-bottom:1px solid var(--line); padding:22px 0; cursor:pointer; }
+  .faq-q{ display:flex; justify-content:space-between; align-items:center; gap:20px; font-weight:700; font-size:16.5px; }
+  .faq-q .plus{ font-size:22px; color:var(--sage-deep); transition:transform .3s ease; flex:none; font-family:var(--serif); }
+  .faq-item.open .plus{ transform:rotate(45deg); }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .35s ease, padding .35s ease; font-size:14.5px; color:var(--ink-soft); }
+  .faq-item.open .faq-a{ max-height:200px; padding-top:14px; }
+
+  /* ================= OFERTA FINAL ================= */
+  .offer{ background:var(--pine); border-radius:var(--radius-lg); position:relative; overflow:hidden; }
+  .offer-inner{ padding:86px 56px; text-align:center; max-width:720px; margin:0 auto; }
+  @media (max-width:640px){ .offer-inner{ padding:56px 26px; } }
+  .offer h2{ color:var(--pine-ink); font-size:clamp(30px,4.2vw,46px); margin-bottom:18px; }
+  .offer h2 em{ color:var(--honey); font-style:italic; }
+  .offer p{ color:#C6CDC3; font-size:16.5px; margin-bottom:34px; }
+  .offer-ctas{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .offer-note{ margin-top:20px; font-size:12.5px; color:#9AA398; }
+
+  /* ================= FOOTER ================= */
+  footer{ padding:64px 0 36px; border-top:1px solid var(--line); }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:48px; }
+  @media (max-width:760px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+  .footer-grid h5{ font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); margin-bottom:16px; font-weight:800;}
+  .footer-grid li{ font-size:14px; margin-bottom:10px; color:var(--ink-soft); }
+  .footer-grid li a:hover{ color:var(--sage-deep); }
+  .footer-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; font-size:12.5px; color:var(--ink-soft); padding-top:26px; border-top:1px solid var(--line); }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.show{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="logo"><span class="logo-mark"></span>[Nome da Clínica]</div>
+    <nav class="nav-links">
+      <a href="#beneficios">Cuidados</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#depoimentos">Pacientes</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
+    <div class="nav-cta">
+      <span class="nav-phone">📞 [(00) 00000-0000]</span>
+      <a href="#agendar" class="btn btn-primary">Agendar avaliação</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal show">
+      <p class="eyebrow">Odontologia de família</p>
+      <h1>Cuidar do seu sorriso não precisa <em>dar medo</em>. Nem pressa.</h1>
+      <p class="lead">Consultas sem correria, explicações em português claro e um plano de tratamento pensado pra sua rotina — e pro seu bolso. Do primeiro dentinho ao sorriso dos avós, cuidamos de quem você ama.</p>
+      <div class="hero-ctas">
+        <a href="#agendar" class="btn btn-primary">Agendar minha avaliação →</a>
+        <a href="#como-funciona" class="btn btn-ghost">Como funciona</a>
+      </div>
+      <div class="trust-mini">
+        <span><i class="dot"></i>Avaliação sem compromisso</span>
+        <span><i class="dot"></i>Atendemos toda a família</span>
+        <span><i class="dot"></i>[Convênios / condições — preencher]</span>
+      </div>
+      <p class="signature-note">— com carinho, equipe [Nome da Clínica] 🦷</p>
+    </div>
+
+    <div class="hero-art reveal show">
+      <div class="blob">
+        <div class="blob-photo">[Imagem]</div>
+      </div>
+      <div class="float-card c1"><span class="ic">😊</span>Ambiente pensado pra você relaxar, não pra causar ansiedade.</div>
+      <div class="float-card c2"><span class="ic">🗓️</span>Encaixe rápido em caso de dor ou emergência.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRUST STRIP ===================== -->
+<div class="trust-strip">
+  <div class="wrap trust-strip-inner">
+    <div class="trust-item"><span class="ic">🤝</span><div><p>Atendimento humanizado</p><span>Consulta é conversa, não só cadeira</span></div></div>
+    <div class="trust-item"><span class="ic">🧾</span><div><p>Orçamento claro, sem letras miúdas</p><span>Você entende cada etapa antes de decidir</span></div></div>
+    <div class="trust-item"><span class="ic">👨‍👩‍👧‍👦</span><div><p>Da criança ao idoso</p><span>Um único endereço para toda a família</span></div></div>
+    <div class="trust-item"><span class="ic">📍</span><div><p>[Bairro / Cidade — preencher]</p><span>Fácil de chegar, fácil de confiar</span></div></div>
+  </div>
+</div>
+
+<svg class="smile-divider wrap" viewBox="0 0 1180 46" preserveAspectRatio="none"><path d="M0,25 Q 295,5 590,25 T 1180,25"/></svg>
+
+<!-- ===================== BENEFÍCIOS (zigzag) ===================== -->
+<section id="beneficios">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Por que as famílias ficam</p>
+      <h2>Um cuidado que acompanha cada fase da sua vida — não só o problema do momento.</h2>
+    </div>
+
+    <div class="zig">
+      <div class="zig-row reveal">
+        <div class="zig-visual">🌿</div>
+        <div class="zig-text">
+          <span class="zig-num">Primeiro</span>
+          <h3>Uma avaliação de verdade, sem pressa e sem susto no fim</h3>
+          <p>Antes de qualquer procedimento, você senta, conversa e entende exatamente o que está acontecendo — em linguagem simples, sem jargão técnico para te apressar a decidir.</p>
+          <ul>
+            <li>Diagnóstico explicado com calma, com imagens quando necessário</li>
+            <li>Plano de tratamento por escrito, sem custo escondido</li>
+            <li>Você decide no seu tempo — sem pressão de consultório</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="zig-row rev reveal">
+        <div class="zig-visual">🧸</div>
+        <div class="zig-text">
+          <span class="zig-num">Segundo</span>
+          <h3>Seus filhos aprendem a gostar de vir ao dentista</h3>
+          <p>Atendimento infantil pensado para reduzir o medo desde a primeira visita — porque a relação que criamos hoje é a que eles vão levar para a vida adulta.</p>
+          <ul>
+            <li>Consultas de adaptação antes de qualquer procedimento</li>
+            <li>Equipe treinada para lidar com ansiedade infantil</li>
+            <li>Pais acompanham o atendimento sempre que possível</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="zig-row reveal">
+        <div class="zig-visual">💛</div>
+        <div class="zig-text">
+          <span class="zig-num">Terceiro</span>
+          <h3>Planos que cabem no seu orçamento, não só no papel</h3>
+          <p>Entendemos que tratamento odontológico é investimento. Por isso montamos condições realistas antes de você se comprometer com qualquer coisa.</p>
+          <ul>
+            <li>[Parcelamento / condições — preencher]</li>
+            <li>[Convênios aceitos — preencher]</li>
+            <li>Prioridade sempre no que é essencial primeiro</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMO FUNCIONA ===================== -->
+<section id="como-funciona" style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="eyebrow" style="justify-content:center;">Como funciona</p>
+      <h2>Do primeiro contato ao sorriso que você queria mostrar</h2>
+      <p>Três passos simples, pensados para tirar o peso da decisão dos seus ombros.</p>
+    </div>
+    <div class="timeline-wrap">
+      <div class="timeline">
+        <div class="step reveal">
+          <span class="step-eyebrow">um</span>
+          <h3>Você agenda sua avaliação</h3>
+          <p>Pelo WhatsApp ou telefone, em poucos minutos — sem formulário longo, sem burocracia.</p>
+        </div>
+        <div class="step reveal">
+          <span class="step-eyebrow">dois</span>
+          <h3>Conversamos e explicamos tudo</h3>
+          <p>Você entende o diagnóstico, as opções e os valores antes de decidir qualquer coisa.</p>
+        </div>
+        <div class="step reveal">
+          <span class="step-eyebrow">três</span>
+          <h3>Seguimos no seu ritmo</h3>
+          <p>Tratamento planejado em etapas, respeitando seu tempo, sua rotina e seu orçamento.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MANIFESTO / DIFERENCIAL ===================== -->
+<section>
+  <div class="wrap">
+    <div class="manifesto reveal">
+      <div class="manifesto-inner">
+        <p class="eyebrow">Nosso jeito de cuidar</p>
+        <h2>Não somos só mais um consultório. Somos o dentista que <em>explica antes de agir</em> — e que lembra do seu nome na próxima visita.</h2>
+        <p>[Espaço para descrever o mecanismo/diferencial real da clínica: metodologia de atendimento, formação da equipe, abordagem humanizada, tecnologia utilizada, etc. — preencher com informações verídicas.]</p>
+        <div class="manifesto-tag">
+          <span>Atendimento sem pressa</span>
+          <span>Linguagem acessível</span>
+          <span>Planejamento transparente</span>
+          <span>[Diferencial adicional — preencher]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ANTES / DEPOIS (transformação) ===================== -->
+<section>
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="eyebrow" style="justify-content:center;">A diferença que você sente</p>
+      <h2>O que muda quando você é bem cuidado</h2>
+    </div>
+    <div class="compare reveal">
+      <div class="compare-col before">
+        <h4>Como costuma ser</h4>
+        <ul>
+          <li>Consulta corrida, sem tempo para perguntas</li>
+          <li>Orçamento surpresa no fim do atendimento</li>
+          <li>Medo que se arrasta desde a infância</li>
+          <li>Você só volta quando dói</li>
+        </ul>
+      </div>
+      <div class="compare-col after">
+        <h4>Como é aqui</h4>
+        <ul>
+          <li>Tempo para entender cada etapa do tratamento</li>
+          <li>Valores claros, definidos antes de começar</li>
+          <li>Ambiente pensado para acolher, não apressar</li>
+          <li>Acompanhamento contínuo, não só emergencial</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DEPOIMENTOS ===================== -->
+<section id="depoimentos" style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Quem já passou por aqui</p>
+      <h2>Famílias que confiam no cuidado do dia a dia</h2>
+    </div>
+    <div class="testi-scroll reveal">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>[Depoimento real de paciente — preencher. Não inserir avaliações fictícias.]</p>
+        <div class="testi-person"><div class="testi-avatar"></div><div><strong>[Nome do paciente]</strong><span>[Tratamento realizado]</span></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>[Depoimento real de paciente — preencher. Não inserir avaliações fictícias.]</p>
+        <div class="testi-person"><div class="testi-avatar"></div><div><strong>[Nome do paciente]</strong><span>[Tratamento realizado]</span></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>[Depoimento real de paciente — preencher. Não inserir avaliações fictícias.]</p>
+        <div class="testi-person"><div class="testi-avatar"></div><div><strong>[Nome do paciente]</strong><span>[Tratamento realizado]</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="eyebrow" style="justify-content:center;">Dúvidas frequentes</p>
+      <h2>Perguntas que quase todo paciente novo faz</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q">Vai doer?<span class="plus">+</span></div>
+        <div class="faq-a">A grande maioria dos procedimentos é feita com anestesia local e sem desconforto. Se você tem medo, conte pra gente antes — ajustamos o ritmo do atendimento pra você.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Quanto custa e dá pra parcelar?<span class="plus">+</span></div>
+        <div class="faq-a">[Explicar política de valores e parcelamento — preencher]. Você recebe o orçamento por escrito antes de qualquer decisão.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Vocês atendem crianças?<span class="plus">+</span></div>
+        <div class="faq-a">Sim. Temos abordagem específica para atendimento infantil, com consultas de adaptação antes de qualquer procedimento.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Aceitam convênio ou só particular?<span class="plus">+</span></div>
+        <div class="faq-a">[Listar convênios aceitos ou informar que é atendimento particular — preencher]</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Tenho uma emergência agora, o que eu faço?<span class="plus">+</span></div>
+        <div class="faq-a">Chame a gente pelo WhatsApp [(00) 00000-0000] — priorizamos encaixes em caso de dor ou urgência.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OFERTA FINAL ===================== -->
+<section id="agendar">
+  <div class="wrap">
+    <div class="offer reveal">
+      <div class="offer-inner">
+        <p class="eyebrow" style="justify-content:center;">Comece por aqui</p>
+        <h2>Marque sua <em>avaliação sem compromisso</em> e saia do consultório com um plano claro</h2>
+        <p>Sem letra miúda, sem pressão de venda. Você entende o que precisa e decide com calma.</p>
+        <div class="offer-ctas">
+          <a href="#" class="btn btn-onDark">Agendar pelo WhatsApp →</a>
+          <a href="tel:+5500000000000" class="btn btn-ghost" style="border-color:rgba(233,228,214,0.3); color:var(--pine-ink);">Ligar agora</a>
+        </div>
+        <p class="offer-note">[Condições da oferta — preencher, ex: "avaliação inicial sem custo até dia X"]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;"><span class="logo-mark"></span>[Nome da Clínica]</div>
+        <p style="font-size:14px; color:var(--ink-soft); max-width:260px;">Odontologia de família com atendimento humanizado. [Endereço completo — preencher]</p>
+      </div>
+      <div>
+        <h5>Clínica</h5>
+        <ul>
+          <li><a href="#beneficios">Cuidados</a></li>
+          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#depoimentos">Pacientes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contato</h5>
+        <ul>
+          <li>[(00) 00000-0000]</li>
+          <li>[email@clinica.com.br]</li>
+          <li>[Endereço — preencher]</li>
+        </ul>
+      </div>
+      <div>
+        <h5>Horário</h5>
+        <ul>
+          <li>[Seg–Sex: 00h–00h]</li>
+          <li>[Sáb: 00h–00h]</li>
+          <li>Emergências: [preencher]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© [ano] [Nome da Clínica]. Todos os direitos reservados.</span>
+      <span>[Nome do responsável técnico] · CRO-[UF] [00000]</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
